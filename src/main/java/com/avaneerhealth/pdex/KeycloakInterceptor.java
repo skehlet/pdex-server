@@ -25,6 +25,8 @@ import org.json.JSONObject;
 import java.util.Base64;
 import java.util.List;
 
+import static ca.uhn.fhir.rest.api.Constants.URL_TOKEN_METADATA;
+
 /**
  * Created by LarsKristian on 12.09.2016.
  * Updated by Steve Kehlet on 2024-07-09.
@@ -39,9 +41,9 @@ public class KeycloakInterceptor extends AuthorizationInterceptor {
 
     public KeycloakInterceptor(KeycloakProperties keycloakProperties) {
         this.keycloakProperties = keycloakProperties;
-        logger.info("keycloakProperties.getEnableAuth(): ", keycloakProperties.getEnableAuth());
-        logger.info("keycloakProperties.getJwksUrl(): ", keycloakProperties.getJwksUrl());
-        logger.info("keycloakProperties.getIssuer(): ", keycloakProperties.getIssuer());
+        logger.info("keycloakProperties.getEnableAuth(): {}", keycloakProperties.getEnableAuth());
+        logger.info("keycloakProperties.getJwksUrl(): {}", keycloakProperties.getJwksUrl());
+        logger.info("keycloakProperties.getIssuer(): {}", keycloakProperties.getIssuer());
     }
 
     @Override
@@ -49,6 +51,11 @@ public class KeycloakInterceptor extends AuthorizationInterceptor {
 
         // No check needed if authentication is disabled
         if (!keycloakProperties.getEnableAuth()) {
+            return new RuleBuilder().allowAll().build();
+        }
+
+        // Allow access without authentication to the metadata endpoint
+        if (isMetadataPath(theRequestDetails)) {
             return new RuleBuilder().allowAll().build();
         }
 
@@ -141,9 +148,12 @@ public class KeycloakInterceptor extends AuthorizationInterceptor {
         }
     }
 
-
     private JSONObject getDecodedJSONObject(String encodedString){
         byte[] decoded = Base64.getDecoder().decode(encodedString);
         return new JSONObject(new String(decoded));
     }
+
+	private boolean isMetadataPath(RequestDetails theRequestDetails) {
+		return theRequestDetails != null && URL_TOKEN_METADATA.equals(theRequestDetails.getRequestPath());
+	}
 }
