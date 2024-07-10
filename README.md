@@ -1,3 +1,15 @@
+# PDex FHIR Server with simple Keycloak access token inteceptor (based on [HL7-DaVinci/pdex-server](https://github.com/HL7-DaVinci/pdex-server))
+
+This is a simple fork of [HL7-DaVinci/pdex-server](https://github.com/HL7-DaVinci/pdex-server) that add a Keycloak access token interceptor. 
+
+Set these environment variables to use it:
+
+* KEYCLOAK_ENABLE_AUTH=true
+* KEYCLOAK_JWKS_URL=https://your-keycloak-server/auth/realms/your-domain/protocol/openid-connect/certs
+* KEYCLOAK_ISSUER=https://your-keycloak-server/auth/realms/your-domain
+
+FYI, your Keycloak server may or may not have `/auth` in the URL, adjust accordingly.
+
 # PDex FHIR Server (based on HAPI-FHIR Starter Project)
 
 This project is based on the [HAPI-FHIR JPA Server Starter Project](https://github.com/hapifhir/hapi-fhir-jpaserver-starter)
