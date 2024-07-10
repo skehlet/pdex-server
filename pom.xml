@@ -161,6 +161,24 @@
             <type>war</type>
             <scope>provided</scope>
         </dependency>
+
+<!-- BEGIN skehlet -->
+
+<!-- https://mvnrepository.com/artifact/org.bitbucket.b_c/jose4j -->
+<dependency>
+    <groupId>org.bitbucket.b_c</groupId>
+    <artifactId>jose4j</artifactId>
+    <version>0.9.6</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20240303</version>
+</dependency>
+
+<!-- END skehlet -->
+
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-testpage-overlay</artifactId>

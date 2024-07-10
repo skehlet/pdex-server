@@ -173,7 +173,7 @@ hapi:
     search-coord-queue-capacity: 200
     
     # comma-separated package names, will be @ComponentScan'ed by Spring to allow for creating custom Spring beans
-    custom-bean-packages: com.lantanagroup.pdex.cdshooks
+    custom-bean-packages: com.lantanagroup.pdex.cdshooks,com.avaneerhealth.pdex
     
     # comma-separated list of fully qualified interceptor classes. 
     # classes listed here will be fetched from the Spring context when combined with 'custom-bean-packages', 

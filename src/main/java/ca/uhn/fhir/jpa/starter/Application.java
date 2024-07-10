@@ -38,6 +38,8 @@ import com.lantanagroup.pdex.security.SearchInterceptor;
 import com.lantanagroup.pdex.security.SecurityProperties;
 import com.lantanagroup.pdex.security.SmartDiscoveryInterceptor;
 
+import com.avaneerhealth.pdex.KeycloakInterceptor;
+import com.avaneerhealth.pdex.KeycloakProperties;
 
 @ComponentScan(basePackages = {"ca.uhn.fhir.jpa.starter", "com.lantanagroup.pdex"})
 @ServletComponentScan(basePackageClasses = {RestfulServer.class})
@@ -78,6 +80,10 @@ public class Application extends SpringBootServletInitializer {
   @Autowired
   SecurityProperties securityProperties;
 
+  // skehlet
+  @Autowired
+  KeycloakProperties keycloakProperties;
+
   @Bean
   @Conditional(OnEitherVersion.class)
   public ServletRegistrationBean hapiServletRegistration(RestfulServer restfulServer) {
@@ -89,6 +95,9 @@ public class Application extends SpringBootServletInitializer {
     restfulServer.registerInterceptor(new SmartDiscoveryInterceptor(appProperties, securityProperties));
     restfulServer.registerInterceptor(new AuthInterceptor(appProperties, securityProperties));
     restfulServer.registerInterceptor(new SearchInterceptor(appProperties, securityProperties));
+
+    // skehlet
+    restfulServer.registerInterceptor(new KeycloakInterceptor(keycloakProperties));
 
     ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
     /* Removed by Corey Spears, Added registerProvider to StarterJpaConfig instead
