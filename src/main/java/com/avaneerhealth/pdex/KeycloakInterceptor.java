@@ -54,7 +54,7 @@ public class KeycloakInterceptor extends AuthorizationInterceptor {
             return new RuleBuilder().allowAll().build();
         }
 
-        // Allow access without authentication to the metadata endpoint
+        // Allow access to the metadata endpoint without authentication
         if (isMetadataPath(theRequestDetails)) {
             return new RuleBuilder().allowAll().build();
         }

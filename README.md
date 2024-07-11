@@ -1,6 +1,6 @@
 # PDex FHIR Server with simple Keycloak access token inteceptor (based on [HL7-DaVinci/pdex-server](https://github.com/HL7-DaVinci/pdex-server))
 
-This is a simple fork of [HL7-DaVinci/pdex-server](https://github.com/HL7-DaVinci/pdex-server) that add a Keycloak access token interceptor. 
+This is a simple fork of [HL7-DaVinci/pdex-server](https://github.com/HL7-DaVinci/pdex-server) that adds a Keycloak access token interceptor. 
 
 Set these environment variables to use it:
 
