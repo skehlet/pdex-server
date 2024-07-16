@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.lantanagroup.pdex.CapabilityStatementCustomizer;
+// import com.lantanagroup.pdex.CapabilityStatementCustomizer;
 import com.lantanagroup.pdex.security.AuthInterceptor;
 import com.lantanagroup.pdex.security.SearchInterceptor;
 import com.lantanagroup.pdex.security.SecurityProperties;
@@ -40,6 +40,7 @@ import com.lantanagroup.pdex.security.SmartDiscoveryInterceptor;
 
 import com.avaneerhealth.pdex.KeycloakInterceptor;
 import com.avaneerhealth.pdex.KeycloakProperties;
+import com.avaneerhealth.pdex.CapabilityStatementCustomizer;
 
 @ComponentScan(basePackages = {"ca.uhn.fhir.jpa.starter", "com.lantanagroup.pdex"})
 @ServletComponentScan(basePackageClasses = {RestfulServer.class})
@@ -89,15 +90,16 @@ public class Application extends SpringBootServletInitializer {
   public ServletRegistrationBean hapiServletRegistration(RestfulServer restfulServer) {
 
     // Register capability statement customizer
-    restfulServer.registerInterceptor(new CapabilityStatementCustomizer(appProperties, securityProperties));
+    // restfulServer.registerInterceptor(new CapabilityStatementCustomizer(appProperties, securityProperties));
+    // skehlet: use mine for now
+    restfulServer.registerInterceptor(new CapabilityStatementCustomizer(keycloakProperties));
 
     // Add interceptors for SMART on FHIR support
     restfulServer.registerInterceptor(new SmartDiscoveryInterceptor(appProperties, securityProperties));
-    restfulServer.registerInterceptor(new AuthInterceptor(appProperties, securityProperties));
-    restfulServer.registerInterceptor(new SearchInterceptor(appProperties, securityProperties));
-
-    // skehlet
+    // restfulServer.registerInterceptor(new AuthInterceptor(appProperties, securityProperties));
+    // skehlet: use mine for now
     restfulServer.registerInterceptor(new KeycloakInterceptor(keycloakProperties));
+    restfulServer.registerInterceptor(new SearchInterceptor(appProperties, securityProperties));
 
     ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
     /* Removed by Corey Spears, Added registerProvider to StarterJpaConfig instead

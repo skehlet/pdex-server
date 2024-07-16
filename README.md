@@ -7,6 +7,7 @@ Set these environment variables to use it:
 * KEYCLOAK_ENABLE_AUTH=true
 * KEYCLOAK_JWKS_URL=https://your-keycloak-server/auth/realms/your-domain/protocol/openid-connect/certs
 * KEYCLOAK_ISSUER=https://your-keycloak-server/auth/realms/your-domain
+* TODO: auth and introspection urls...
 
 FYI, your Keycloak server may or may not have `/auth` in the URL, adjust accordingly.
 

@@ -15,4 +15,10 @@ public class KeycloakProperties {
   String jwksUrl;
   @Getter @Setter
   String issuer;
+  @Getter @Setter
+  String authorizationUrl;
+  @Getter @Setter
+  String introspectionUrl;
+  @Getter @Setter
+  String tokenUrl;
 }
